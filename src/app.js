@@ -4,7 +4,8 @@ import cors from 'cors'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
 
-import productRouter from '../router/product'
+import routerProduct from '../router/product'
+import routerPost from '../router/post'
 
 const app = express()
 //middleware
@@ -12,8 +13,11 @@ app.use(cors())
 app.use(morgan('tiny'))
 app.use(express.json()) //express.json() là middleware
 
-//route
-app.use('/api', productRouter)
+//route product
+app.use('/api', routerProduct)
+
+//route post
+app.use('/api', routerPost)
 
 //connect database
 mongoose.connect('mongodb://localhost:27017/we16309')
