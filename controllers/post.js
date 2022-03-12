@@ -1,6 +1,8 @@
 import mongoose from "mongoose"
 //b1: khoi tao model 
-const Post = mongoose.model('Post', { name: String })
+const Post = mongoose.model('Post', { 
+    name: String,
+})
 
 //API list post
 export const list = async (req, res) => {
