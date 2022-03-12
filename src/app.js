@@ -1,4 +1,3 @@
-// const http = require('http');
 //express
 import express from 'express'
 import cors from 'cors'
@@ -9,9 +8,9 @@ const app = express()
 //middleware
 app.use(cors())
 app.use(morgan('tiny'))
-app.use(express.json())
+app.use(express.json()) //express.json() là middleware
 
-app.use('/api',productRouter)
+app.use('/api', productRouter)
 
 //cổng chạy
 const PORT = 3001;
