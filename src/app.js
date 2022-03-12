@@ -2,6 +2,8 @@
 import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
+import mongoose from 'mongoose'
+
 import productRouter from '../router/product'
 
 const app = express()
@@ -10,10 +12,16 @@ app.use(cors())
 app.use(morgan('tiny'))
 app.use(express.json()) //express.json() là middleware
 
+//route
 app.use('/api', productRouter)
 
+//connect database
+mongoose.connect('mongodb://localhost:27017/we16309')
+    .then(() => console.log("Ket noi db thanh cong"))
+    .catch((error) => console.log(error))
+
 //cổng chạy
-const PORT = 3001;
+const PORT = 3002;
 app.listen(PORT, () => {
     console.log('server running port', PORT);
 })

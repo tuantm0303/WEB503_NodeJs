@@ -1,27 +1,65 @@
-//fake data
-const products = [
-    {id: 1, name: "Product A"},
-    {id: 2, name: "Product B"}
-]
+import mongoose from "mongoose"
+//b1: khoi tao model 
+const Product = mongoose.model('Product', { name: String })
 
-export const list = (req, res) => {
-    res.json(products)
+//API list product
+export const list = async (req, res) => {
+    try {
+        const products = await Product.find({}).exec()
+        res.json(products)
+    } catch (error) {
+        res.status(400).json({
+            message: "Không có sản phẩm nào"
+        })
+    }
 }
 
-export const read = (req, res) => {
-    res.json(products.find(item => item.id === +req.params.id))
+//API list 1 product
+export const read = async (req, res) => {
+    try {
+        const product = await Product.findOne({ _id: req.params.id }).exec();
+        res.json(product);
+    } catch (error) {
+        res.status(400).json({
+            error: "Không có sản phẩm"
+        })
+    }
 }
 
-export const create = (req, res) => {
-    // products.push(req.body)
-    const product = req.body
-    res.json(product)
+//API create product
+export const create = async (req, res) => {
+    try {
+        // products.push(req.body)
+        const product = await new Product(req.body).save()
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            message: "Không thêm được sản phẩm"
+        })
+    }
 }
 
-export const remove = (req, res) => {
-    res.json(products.filter(item => item.id !== +req.params.id))
+//API remove product
+export const remove = async (req, res) => {
+    try {
+        const product = await Product.findOneAndDelete({ _id: req.params.id }).exec()
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            message: "Không xóa được!"
+        })
+    }
 }
 
-export const update = (req, res) => {
-    res.json(products.map(item => item.id == req.params.id ? req.body : item));
+export const update = async (req, res) => {
+    const condition = { id: req.params.id }
+    const update = req.body
+    try {
+        const product = await Product.findOneAndUpdate(condition, update).exec()
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            message: "Không sửa được!"
+        })
+    }
 }
