@@ -21,7 +21,7 @@ mongoose.connect('mongodb://localhost:27017/we16309')
     .catch((error) => console.log(error))
 
 //cổng chạy
-const PORT = 3002;
+const PORT = 3001;
 app.listen(PORT, () => {
     console.log('server running port', PORT);
 })
