@@ -1,7 +1,8 @@
 import mongoose from "mongoose"
 //b1: khoi tao model 
 const Post = mongoose.model('Post', { 
-    name: String,
+    title: String,
+    desc: String
 })
 
 //API list post
@@ -54,7 +55,7 @@ export const remove = async (req, res) => {
 
 //API update post
 export const update = async (req, res) => {
-    const condition = { id: req.params.id }
+    const condition = { _id: req.params.id }
     const update = req.body
     try {
         const post = await Post.findOneAndUpdate(condition, update).exec()
