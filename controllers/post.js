@@ -1,9 +1,4 @@
-import mongoose from "mongoose"
-//b1: khoi tao model 
-const Post = mongoose.model('Post', { 
-    title: String,
-    desc: String
-})
+import Post from "../models/post"
 
 //API list post
 export const list = async (req, res) => {
@@ -56,9 +51,10 @@ export const remove = async (req, res) => {
 //API update post
 export const update = async (req, res) => {
     const condition = { _id: req.params.id }
-    const update = req.body
+    const doc = req.body
+    const option = { new: true }
     try {
-        const post = await Post.findOneAndUpdate(condition, update).exec()
+        const post = await Post.findOneAndUpdate(condition, doc, option)
         res.json(post)
     } catch (error) {
         res.status(400).json({
