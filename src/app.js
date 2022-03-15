@@ -6,6 +6,7 @@ import mongoose from 'mongoose'
 
 import routerProduct from '../router/product'
 import routerPost from '../router/post'
+import routerUser from '../router/user'
 
 const app = express()
 //middleware
@@ -13,11 +14,10 @@ app.use(cors())
 app.use(morgan('tiny'))
 app.use(express.json()) //express.json() là middleware
 
-//route product
+//route
 app.use('/api', routerProduct)
-
-//route post
 app.use('/api', routerPost)
+app.use('/api', routerUser)
 
 //connect database
 mongoose.connect('mongodb://localhost:27017/we16309')
@@ -25,7 +25,7 @@ mongoose.connect('mongodb://localhost:27017/we16309')
     .catch((error) => console.log(error))
 
 //cổng chạy
-const PORT = 3001;
+const PORT = 8000;
 app.listen(PORT, () => {
     console.log('server running port', PORT);
 })
