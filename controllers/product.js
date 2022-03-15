@@ -1,10 +1,10 @@
-import mongoose from "mongoose"
+import Product from "../models/product"
 //b1: khoi tao model
-const Product = mongoose.model('Product', {
-    name: String,
-    desc: String,
-    price: Number
-})
+// const Product = mongoose.model('Product', {
+//     name: String,
+//     desc: String,
+//     price: Number
+// })
 
 //API list product
 export const list = async (req, res) => {
@@ -55,11 +55,13 @@ export const remove = async (req, res) => {
     }
 }
 
+//API update product
 export const update = async (req, res) => {
     const condition = { _id: req.params.id }
-    const update = req.body
+    const doc = req.body
+    const option = { new: true }
     try {
-        const product = await Product.findOneAndUpdate(condition, update).exec()
+        const product = await Product.findOneAndUpdate(condition, doc, option)
         res.json(product)
     } catch (error) {
         res.status(400).json({
