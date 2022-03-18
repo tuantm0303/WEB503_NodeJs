@@ -7,6 +7,7 @@ import mongoose from 'mongoose'
 import routerProduct from '../router/product'
 import routerPost from '../router/post'
 import routerUser from '../router/user'
+import routerCategory from '../router/category'
 
 const app = express()
 //middleware
@@ -16,6 +17,7 @@ app.use(express.json()) //express.json() là middleware
 
 //route
 app.use('/api', routerProduct)
+app.use('/api', routerCategory)
 app.use('/api', routerPost)
 app.use('/api', routerUser)
 

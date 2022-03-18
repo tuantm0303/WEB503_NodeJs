@@ -12,6 +12,10 @@ const productSchema = new Schema({
     desc: {
         type: String,
         required: true
+    },
+    categoryId: {
+        type: String,
+        ref: "Category"
     }
 }, { timestamps: true })
 
