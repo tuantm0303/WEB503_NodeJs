@@ -1,11 +1,4 @@
 import User from "../models/user"
-//b1: khoi tao model 
-// const User = mongoose.model('User', { 
-//     name: String,
-//     phone: String,
-//     age: Number,
-//     address: String
-// })
 
 //API list user
 export const list = async (req, res) => {
@@ -19,8 +12,8 @@ export const list = async (req, res) => {
     }
 }
 
-//API list 1 user
-export const read = async (req, res) => {
+//API signIn 1 user
+export const signIn = async (req, res) => {
     try {
         const product = await User.findOne({ _id: req.params.id }).exec();
         res.json(product);
@@ -31,8 +24,8 @@ export const read = async (req, res) => {
     }
 }
 
-//API create user
-export const create = async (req, res) => {
+//API signUp user
+export const signUp = async (req, res) => {
     try {
         const user = await new User(req.body).save()
         res.json(user)
