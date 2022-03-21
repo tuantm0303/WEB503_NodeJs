@@ -1,10 +1,5 @@
+import slugify from "slugify"
 import Product from "../models/product"
-//b1: khoi tao model
-// const Product = mongoose.model('Product', {
-//     name: String,
-//     desc: String,
-//     price: Number
-// })
 
 //API list product
 export const list = async (req, res) => {
@@ -32,8 +27,8 @@ export const read = async (req, res) => {
 
 //API create product
 export const create = async (req, res) => {
+    req.body.slug = slugify(req.body.name)
     try {
-        // products.push(req.body)
         const product = await new Product(req.body).save()
         res.json(product)
     } catch (error) {
@@ -57,6 +52,7 @@ export const remove = async (req, res) => {
 
 //API update product
 export const update = async (req, res) => {
+    req.body.slug = slugify(req.body.name)
     const condition = { _id: req.params.id }
     const doc = req.body
     const option = { new: true }

@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose"
+
 const productSchema = new Schema({
     name: {
         type: String,
@@ -8,6 +9,12 @@ const productSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    slug: {
+        type: String,
+        lowercase: true,
+        unique: true,
+        index: true
     },
     desc: {
         type: String,
