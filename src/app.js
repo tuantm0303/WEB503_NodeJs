@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 
 import routerProduct from '../router/product'
 import routerPost from '../router/post'
-import routerUser from '../router/user'
+import routerUser from '../router/auth'
 import routerCategory from '../router/category'
 
 const app = express()
