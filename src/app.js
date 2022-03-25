@@ -6,8 +6,8 @@ import mongoose from 'mongoose'
 
 import routerProduct from '../router/product'
 import routerPost from '../router/post'
-import routerUser from '../router/auth'
 import routerCategory from '../router/category'
+import routerUser from '../router/auth'
 
 const app = express()
 //middleware
@@ -27,31 +27,10 @@ mongoose.connect('mongodb://localhost:27017/we16309')
     .catch((error) => console.log(error))
 
 //cổng chạy
-const PORT = 8001;
+const PORT = 8000;
 app.listen(PORT, () => {
     console.log('server running port', PORT);
 })
-
-// const server = http.createServer((req, res) => {
-//     console.log("url", req.url);
-//     if(req.url === '/'){
-//         res.setHeader('Content-Type',"text/html")
-//         res.write('<html><body><h1>Home</h1></body></html>')
-//         res.end()
-//     }else if(req.url === '/api/products'){
-//         const products =[
-//             {id: 1, name: "Product A"},
-//             {id: 2, name: "Product B"}
-//         ]
-//         res.end(JSON.stringify(products))
-//     }else{
-//         console.log('hi')
-//         res.end()
-//     }
-// })
-
-
-
 
 /**
  * npm i -g json-server: cai dat module vao o he thong
