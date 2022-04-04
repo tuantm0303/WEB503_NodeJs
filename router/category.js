@@ -6,9 +6,9 @@ import { checkAuth } from "../middlewares/checkAuth";
 const routerCategory = Router()
 
 routerCategory.get('/categories', checkAuth, list)
-routerCategory.get('/category/:id', checkAuth, read)
+routerCategory.get('/categories/:id', checkAuth, read)
 routerCategory.post('/categories', checkAuth, create)
-routerCategory.put('/category/:id', checkAuth, update)
-routerCategory.get('/categor/:id', checkAuth, remove)
+routerCategory.put('/categories/:id', checkAuth, update)
+routerCategory.delete('/categories/:id', checkAuth, remove)
 
 export default routerCategory

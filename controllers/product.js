@@ -27,7 +27,7 @@ export const read = async (req, res) => {
 
 //API create product
 export const create = async (req, res) => {
-    req.body.slug = slugify(req.body.name)
+    req.body.slug = slugify(req.body.title)
     try {
         const product = await new Product(req.body).save()
         res.json(product)
@@ -52,7 +52,7 @@ export const remove = async (req, res) => {
 
 //API update product
 export const update = async (req, res) => {
-    req.body.slug = slugify(req.body.name)
+    req.body.slug = slugify(req.body.title)
     const condition = { _id: req.params.id }
     const doc = req.body
     const option = { new: true }

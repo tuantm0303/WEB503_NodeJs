@@ -2,7 +2,7 @@ import User from "../models/user";
 import jwt from 'jsonwebtoken';
 
 export const signup = async (req, res) => {
-  const { email } = req.body
+  const { name, email, password } = req.body
   try {
     const exitUser = await User.findOne({ email }).exec()
     if (exitUser) {
@@ -10,7 +10,7 @@ export const signup = async (req, res) => {
         message: "Email đã tồn tại"
       })
     }
-    const user = await new User(req.body).save()
+    const user = await new User({ name, email, password }).save()
     res.json({
       _id: user._id,
       name: user.name,
@@ -39,7 +39,7 @@ export const signin = async (req, res) => {
     }
 
     const token = jwt.sign({ _id: user._id }, '123456', { expiresIn: 60 * 60 })
-    
+
     res.json({
       token,
       user: {
@@ -51,6 +51,28 @@ export const signin = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       message: "Lỗi rồi anh êi"
+    })
+  }
+}
+
+export const list = async (req, res) => {
+  try {
+    const user = await User.find({}).exec()
+    res.json(user)
+  } catch (error) {
+    res.status(400).json({
+      message: "Không có người dùng nào"
+    })
+  }
+}
+
+export const remove = async (req, res) => {
+  try {
+    const user = await User.findOneAndDelete({ _id: req.params.id }).exec()
+    res.json(user)
+  } catch (error) {
+    res.status(400).json({
+      message: "Không xóa được!"
     })
   }
 }
