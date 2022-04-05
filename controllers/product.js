@@ -65,3 +65,14 @@ export const update = async (req, res) => {
         })
     }
 }
+
+export const search = async (req, res) => {
+    const searchString = req.query.q
+    console.log(searchString)
+    try {
+        const result = await Product.find($search).exec()
+        res.json(result)
+    } catch (error) {
+
+    }
+}
