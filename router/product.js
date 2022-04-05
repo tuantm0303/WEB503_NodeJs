@@ -7,8 +7,8 @@ const routerProduct = Router()
 
 routerProduct.get('/products', checkAuth, list)
 routerProduct.get('/products/:id', checkAuth, read)
-// routerProduct.post('/products/:userId', requireSignin, isAuth, isAdmin, create);
-routerProduct.post('/products', checkAuth, create)
+routerProduct.post('/products/:userId', requireSignin, isAuth, isAdmin, create);
+// routerProduct.post('/products', checkAuth, create)
 routerProduct.delete('/products/:id', checkAuth, remove)
 routerProduct.put('/products/:id', checkAuth, update)
 

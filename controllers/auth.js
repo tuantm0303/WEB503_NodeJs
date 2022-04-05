@@ -77,9 +77,10 @@ export const remove = async (req, res) => {
   }
 }
 
-// export const signout = (req, res) => {
-//   res.clearCookie('token');
-//   res.json({
-//     message: "Signout Successfully"
-//   })
-// }
+export const signout = (req, res) => {
+  res.clearCookie('token');
+  // localStorage.removeItem(data)
+  res.json({
+    message: "Signout Successfully"
+  })
+}
