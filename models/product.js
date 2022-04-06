@@ -1,10 +1,12 @@
+// import { text } from "express"
 import mongoose, { Schema } from "mongoose"
 
 const productSchema = new Schema({
     title: {
         type: String,
         minLength: 5,
-        required: true
+        required: true,
+        index: true
     },
     image: {
         type: String,
@@ -38,5 +40,6 @@ const productSchema = new Schema({
         index: true
     },
 }, { timestamps: true })
+productSchema.index({ '$**': 'text' });
 
 export default mongoose.model('Product', productSchema)

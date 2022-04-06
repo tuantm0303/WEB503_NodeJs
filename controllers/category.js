@@ -17,7 +17,7 @@ export const list = async (req, res) => {
 export const read = async (req, res) => {
   try {
     const category = await Category.findOne({ _id: req.params.id }).exec();
-    const product = await Product.find({category}).select('-categoryId').exec()
+    const product = await Product.find({ category }).select('-categoryId').exec()
     res.json({
       category,
       product

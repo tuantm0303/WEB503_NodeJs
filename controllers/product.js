@@ -70,7 +70,7 @@ export const search = async (req, res) => {
     const searchString = req.query.q
     console.log(searchString)
     try {
-        const result = await Product.find($search).exec()
+        const result = await Product.find({ $text: { $search: searchString } })
         res.json(result)
     } catch (error) {
 
