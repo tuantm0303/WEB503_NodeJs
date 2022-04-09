@@ -15,12 +15,13 @@ export const list = async (req, res) => {
 
 //API list 1 product
 export const read = async (req, res) => {
+    const { slug } = req.params
     try {
-        const product = await Product.findOne({ _id: req.params.id }).exec();
-        res.json(product);
+        const product = await Product.findOne({ slug }).exec()
+        res.json(product)
     } catch (error) {
-        res.status(400).json({
-            error: "Không có sản phẩm"
+        return res.status(400).json({
+            message: "Không có sản phẩm",
         })
     }
 }
@@ -67,10 +68,10 @@ export const update = async (req, res) => {
 }
 
 export const search = async (req, res) => {
-    const searchString = req.query.q
-    console.log(searchString)
+    const key = req.query.q
+    console.log(key)
     try {
-        const result = await Product.find({ $text: { $search: searchString } })
+        const result = await Product.find({ $text: { $search: key } })
         res.json(result)
     } catch (error) {
 
