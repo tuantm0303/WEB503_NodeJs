@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { create, list, read, remove } from "../controllers/category";
-import { update } from "../controllers/product";
+import { create, list, read, readProOnCate, remove, update } from "../controllers/category";
 import { userById } from "../controllers/user";
 import { checkAuth, isAdmin, isAuth, requireSignin } from "../middlewares/checkAuth";
 
 const routerCategory = Router()
 
 routerCategory.get('/categories', checkAuth, list)
-routerCategory.get('/categories/:id', checkAuth, read)
+routerCategory.get('/categories/:id', checkAuth, readProOnCate)
+routerCategory.get('/category/:id', checkAuth, read)
 routerCategory.post('/categories/:userId', requireSignin, isAuth, isAdmin, checkAuth, create)
-routerCategory.put('/categories/:id', checkAuth, update)
+routerCategory.put('/categories/:id/:userId', requireSignin, isAuth, isAdmin, checkAuth, update)
 routerCategory.delete('/categories/:id/:userId', requireSignin, isAuth, isAdmin, checkAuth, remove)
 
 routerCategory.param('userId', userById)

@@ -14,14 +14,25 @@ export const list = async (req, res) => {
 }
 
 //API list 1 category
+export const readProOnCate = async (req, res) => {
+  try {
+    const categoryId = await Category.findById({ _id: req.params.id }).exec();
+    const products = await Product.find({ categoryId }).select("-categoryId").exec();
+    res.json({
+      categoryId,
+      products
+    })
+  } catch (error) {
+    res.status(400).json({
+      error: "Không có danh mục"
+    })
+  }
+}
+
 export const read = async (req, res) => {
   try {
-    const category = await Category.findOne({ _id: req.params.id }).exec();
-    const product = await Product.find({ category }).select('-categoryId').exec()
-    res.json({
-      category,
-      product
-    });
+    const category = await Category.findOne({ _id: req.params.id }).exec()
+    res.json(category);
   } catch (error) {
     res.status(400).json({
       error: "Không có danh mục"

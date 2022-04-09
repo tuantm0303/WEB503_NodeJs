@@ -10,7 +10,7 @@ routerProduct.get('/products/:id', checkAuth, read)
 routerProduct.post('/products/:userId', requireSignin, isAuth, isAdmin, checkAuth, create)
 routerProduct.delete('/products/:id/:userId', requireSignin, isAuth, isAdmin, checkAuth, remove)
 routerProduct.put('/products/:id/:userId', requireSignin, isAuth, isAdmin, checkAuth, update)
-routerProduct.post('/search', search)
+routerProduct.get('/search', search)
 
 routerProduct.param('userId', userById)
 

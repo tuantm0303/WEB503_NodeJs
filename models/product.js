@@ -1,5 +1,4 @@
-// import { text } from "express"
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema, ObjectId } from "mongoose"
 
 const productSchema = new Schema({
     title: {
@@ -31,8 +30,8 @@ const productSchema = new Schema({
         required: true
     },
     categoryId: {
-        type: mongoose.Types.ObjectId,
-        ref: "Category",
+        type: ObjectId,
+        ref: "Categories",
     },
     slug: {
         type: String,
