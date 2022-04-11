@@ -66,6 +66,17 @@ export const list = async (req, res) => {
   }
 }
 
+export const read = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id }).exec()
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({
+      error: "Không có người dùng"
+    })
+  }
+}
+
 export const remove = async (req, res) => {
   try {
     const user = await User.findOneAndDelete({ _id: req.params.id }).exec()
@@ -77,10 +88,23 @@ export const remove = async (req, res) => {
   }
 }
 
+export const update = async (req, res) => {
+  const condition = { _id: req.params.id }
+  const doc = req.body
+  const option = { new: true }
+  try {
+    const user = await User.findOneAndUpdate(condition, doc, option)
+    res.json(user)
+  } catch (error) {
+    res.status(400).json({
+      message: "Không sửa được!"
+    })
+  }
+}
+
 export const signout = (req, res) => {
   res.clearCookie('token');
-  // localStorage.removeItem(data)
-  res.json({
+  res.status(400).json({
     message: "Signout Successfully"
   })
 }

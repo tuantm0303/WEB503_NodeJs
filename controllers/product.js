@@ -1,5 +1,6 @@
 import slugify from "slugify"
 import Product from "../models/product"
+import Category from "../models/category"
 
 //API list product
 export const list = async (req, res) => {
@@ -69,11 +70,40 @@ export const update = async (req, res) => {
 
 export const search = async (req, res) => {
     const key = req.query.q
-    console.log(key)
     try {
         const result = await Product.find({ $text: { $search: key } })
         res.json(result)
     } catch (error) {
 
+    }
+}
+
+// API Pagination
+export const paginateResults = async (req, res) => {
+    const PageSize = 4;
+    var page = req.query.page;
+    if (page) {
+        page = parseInt(page);
+        const skip = (page - 1) * PageSize;
+        try {
+            const paginate = await Product.find({}).skip(skip).limit(PageSize)
+            res.json(paginate)
+        } catch (error) {
+            res.status(400).json(error)
+        }
+    }
+}
+
+export const productItem = async (req, res) => {
+    const query = req.params._expand
+    try {
+        const item = await Product.find({ categoryId })
+        const category = await Category.findById(query)
+        res.json({
+            item,
+            category
+        })
+    } catch (error) {
+        res.status(400).json(error)
     }
 }

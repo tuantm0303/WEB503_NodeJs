@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { create, list, read, readSlug, remove, search, update } from "../controllers/product";
+import { create, list, paginateResults, productItem, read, remove, search, update } from "../controllers/product";
 import { userById } from "../controllers/user";
 import { checkAuth, isAdmin, isAuth, requireSignin } from "../middlewares/checkAuth";
 
@@ -11,6 +11,8 @@ routerProduct.post('/products/:userId', requireSignin, isAuth, isAdmin, checkAut
 routerProduct.delete('/products/:id/:userId', requireSignin, isAuth, isAdmin, checkAuth, remove)
 routerProduct.put('/products/:id/:userId', requireSignin, isAuth, isAdmin, checkAuth, update)
 routerProduct.get('/search', search)
+routerProduct.get('/products?_expand=', productItem)
+routerProduct.get('/product', paginateResults)
 
 routerProduct.param('userId', userById)
 
