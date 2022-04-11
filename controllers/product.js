@@ -94,6 +94,20 @@ export const paginateResults = async (req, res) => {
     }
 }
 
+// lọc
+export const sort = async (req, res) => {
+    const object = {
+        min: parseInt(req.query.min),
+        max: parseInt(req.query.max),
+    }
+    try {
+        const filter = await Product.find({ priceNew: { $gte: object.min, $lte: object.max } })
+        res.json(filter)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}
+
 export const productItem = async (req, res) => {
     const query = req.params._expand
     try {
