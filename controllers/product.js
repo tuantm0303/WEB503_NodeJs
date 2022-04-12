@@ -109,10 +109,10 @@ export const sort = async (req, res) => {
 }
 
 export const productItem = async (req, res) => {
-    const query = req.params._expand
+    const result = req.query._expand
     try {
         const item = await Product.find({ categoryId })
-        const category = await Category.findById(query)
+        const category = await Category.findById(result)
         res.json({
             item,
             category
