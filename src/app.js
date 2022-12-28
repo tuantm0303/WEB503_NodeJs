@@ -4,10 +4,10 @@ import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
 
-import routerProduct from "../router/product";
-import routerPost from "../router/post";
-import routerCategory from "../router/category";
-import routerUser from "../router/auth";
+import routerProduct from "../src/router/product";
+import routerPost from "../src/router/post";
+import routerCategory from "../src/router/category";
+import routerUser from "../src/router/auth";
 
 const app = express();
 //middleware
@@ -24,13 +24,13 @@ app.use("/api", routerUser);
 //connect database
 mongoose
   .connect("mongodb://localhost:27017/we16309")
-  .then(() => console.log("Ket noi db thanh cong"))
+  .then(() => console.log("Connect Database success!"))
   .catch((error) => console.log(error));
 
-//cổng chạy
+// PORT RUN
 const PORT = 8000;
 app.listen(PORT, () => {
-  console.log("server running port", PORT);
+  console.log("Server running port", PORT);
 });
 
 /**
