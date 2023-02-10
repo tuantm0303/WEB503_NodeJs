@@ -30,6 +30,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.6",
     "morgan": "^1.10.0",
+    "now": "^21.0.1",
     "slugify": "^1.6.5"
   }
 }
