@@ -4,10 +4,10 @@ import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
 
-import routerProduct from "../src/router/product";
-import routerPost from "../src/router/post";
-import routerCategory from "../src/router/category";
-import routerUser from "../src/router/auth";
+import routerProduct from "./router/product";
+import routerPost from "./router/post";
+import routerCategory from "./router/category";
+import routerUser from "./router/auth";
 
 const app = express();
 //middleware
